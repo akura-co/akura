@@ -1,0 +1,38 @@
+{
+  "name": "akura",
+  "version": "1.0.0",
+  "description": "akura",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha test.js"
+  },
+  "dependencies": {
+    "afanasy.com": "^1.0.0",
+    "akura.co": "^1.0.0",
+    "bcrypt": "^0.8.5",
+    "body-parser": "1.13.1",
+    "db3": "^2.0.1",
+    "express": "4.12.4",
+    "express-session": "^1.11.3",
+    "fanafan.co": "^1.0.0",
+    "stebeneva.ru": "^1.0.0",
+    "underscore": "^1.8.3",
+    "vhost": "3.0.0"
+  },
+  "devDependencies": {
+    "expect.js": "^0.3.1",
+    "mocha": "^2.3.3",
+    "request": "^2.65.0",
+    "supertest": "^1.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akura-co/akura.git"
+  },
+  "author": "Raabb Ajam <raabbajam@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/akura-co/akura/issues"
+  },
+  "homepage": "https://github.com/akura-co/akura#readme"
+}
