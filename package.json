@@ -7,13 +7,13 @@
     "test": "mocha test.js"
   },
   "dependencies": {
-    "afanasy.com": "^1.0.0",
-    "akura.co": "^1.0.0",
+    "afanasy.com": "^1.2.0",
+    "akura.co": "^1.1.0",
     "body-parser": "^1.14.1",
     "errorhandler": "^1.4.2",
     "express": "4.12.4",
-    "fanafan.co": "^1.0.0",
-    "stebeneva.ru": "^1.0.0",
+    "fanafan.co": "^1.2.0",
+    "stebeneva.ru": "^1.1.0",
     "underscore": "^1.8.3",
     "vhost": "3.0.0"
   },

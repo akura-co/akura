@@ -15,16 +15,13 @@ app.
   use(bodyParser.urlencoded({extended: true}))
 if (process.env.NODE_ENV === 'development') {
   app.use(require('errorhandler')())
-
   _.each(hosts, function (host) {
     var
       vhostApp = requireApp(host),
       alias
-    // app.use('/' + host, express.static('node_modules/' + host + '/public/') )
     app.use('/' + host, vhostApp)
     try {alias = require(host + '/alias')} catch (e) {}
     _.each(alias, function (alias) {
-      // app.use('/' + alias, express.static('node_modules/' + host + '/public/') )
       app.use('/' + alias, vhostApp)
     })
   })
@@ -36,7 +33,6 @@ if (process.env.NODE_ENV === 'development') {
   if (!module.parent) {
     app.listen(3000)
   }
-
 } else {
   app.
     use(function (req, res, next) {
@@ -94,7 +90,6 @@ function requireApp (host) {
   try {
     app = require(host)
   } catch (e) {
-    console.error(host, e.stack);
     app = express.static(__dirname + '/node_modules/' + host)
   }
   return app
