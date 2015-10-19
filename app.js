@@ -7,6 +7,7 @@ var
   bodyParser = require('body-parser'),
   vhost = require('vhost'),
   hosts = require('akura.co/vhost'),
+  config = _.extend(require('./config'), require('./.akura')),
   app = module.exports = express()
 
 process.env.HOME = '/home/ubuntu'
@@ -36,7 +37,7 @@ if (process.env.NODE_ENV === 'development') {
 } else {
   app.
     use(function (req, res, next) {
-      if (req.hostname == 'akura.co') {
+      if (config.ssl && req.hostname == 'akura.co') {
         if (!req.secure)
           return res.redirect('https://' + req.hostname + req.url)
         res.set('Strict-Transport-Security', 'max-age=86400')
@@ -56,34 +57,35 @@ if (process.env.NODE_ENV === 'development') {
     })
   })
   http.createServer(app).listen(80)
-  https.createServer({
-    key: fs.readFileSync(process.env.HOME + '/.akura.co/ssl/akura.co.key'),
-    cert: fs.readFileSync(process.env.HOME + '/.akura.co/ssl/akura.co.crt'),
-    ca: [
-      fs.readFileSync(process.env.HOME + '/.akura.co/ssl/rapidSsl.crt'),
-    ],
-    honorCipherOrder: true,
-    ciphers: [
-      'ECDHE-RSA-AES256-SHA384',
-      'DHE-RSA-AES256-SHA384',
-      'ECDHE-RSA-AES256-SHA256',
-      'DHE-RSA-AES256-SHA256',
-      'ECDHE-RSA-AES128-SHA256',
-      'DHE-RSA-AES128-SHA256',
-      'HIGH',
-      '!aNULL',
-      '!eNULL',
-      '!EXPORT',
-      '!DES',
-      '!RC4',
-      '!MD5',
-      '!PSK',
-      '!SRP',
-      '!CAMELLIA'
-    ].join(':')
-  }, app).listen(443)
+  if (config.ssl) {    
+    https.createServer({
+      key: fs.readFileSync(process.env.HOME + '/.akura.co/ssl/akura.co.key'),
+      cert: fs.readFileSync(process.env.HOME + '/.akura.co/ssl/akura.co.crt'),
+      ca: [
+        fs.readFileSync(process.env.HOME + '/.akura.co/ssl/rapidSsl.crt'),
+      ],
+      honorCipherOrder: true,
+      ciphers: [
+        'ECDHE-RSA-AES256-SHA384',
+        'DHE-RSA-AES256-SHA384',
+        'ECDHE-RSA-AES256-SHA256',
+        'DHE-RSA-AES256-SHA256',
+        'ECDHE-RSA-AES128-SHA256',
+        'DHE-RSA-AES128-SHA256',
+        'HIGH',
+        '!aNULL',
+        '!eNULL',
+        '!EXPORT',
+        '!DES',
+        '!RC4',
+        '!MD5',
+        '!PSK',
+        '!SRP',
+        '!CAMELLIA'
+      ].join(':')
+    }, app).listen(443)
+  }
 }
-
 function requireApp (host) {
   //support both app and static
   var app
