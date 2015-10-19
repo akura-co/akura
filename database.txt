@@ -1,3 +1,0 @@
-create database akura;
-create table `user` (id bigint primary key auto_increment, username text, password text, accessToken text);
-insert user set username = 'raabbajam', password = '$2a$08$j6WMwN3qTc8MzO/kvI65mOFA.A/1w5cKHvCx7uI01JYxNlhZtY2Wq', accessToken='test';

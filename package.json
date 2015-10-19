@@ -9,11 +9,9 @@
   "dependencies": {
     "afanasy.com": "^1.0.0",
     "akura.co": "^1.0.0",
-    "bcrypt": "^0.8.5",
-    "body-parser": "1.13.1",
-    "db3": "^2.0.1",
+    "body-parser": "^1.14.1",
+    "errorhandler": "^1.4.2",
     "express": "4.12.4",
-    "express-session": "^1.11.3",
     "fanafan.co": "^1.0.0",
     "stebeneva.ru": "^1.0.0",
     "underscore": "^1.8.3",
@@ -34,5 +32,8 @@
   "bugs": {
     "url": "https://github.com/akura-co/akura/issues"
   },
-  "homepage": "https://github.com/akura-co/akura#readme"
+  "homepage": "https://github.com/akura-co/akura#readme",
+  "engines": {
+    "node": "0.12.4"
+  }
 }
