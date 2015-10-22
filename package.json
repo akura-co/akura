@@ -8,12 +8,12 @@
   },
   "dependencies": {
     "afanasy.com": "^1.2.0",
-    "akura.co": "^1.1.0",
+    "akura.co": "^1.2",
     "body-parser": "^1.14.1",
     "errorhandler": "^1.4.2",
     "express": "4.12.4",
     "fanafan.co": "^1.2.0",
-    "stebeneva.ru": "^1.1.0",
+    "stebeneva.ru": "^1.2",
     "underscore": "^1.8.3",
     "vhost": "3.0.0"
   },
@@ -21,7 +21,8 @@
     "expect.js": "^0.3.1",
     "mocha": "^2.3.3",
     "request": "^2.65.0",
-    "supertest": "^1.1.0"
+    "supertest": "^1.1.0",
+    "underscore": "^1.8.3"
   },
   "repository": {
     "type": "git",
@@ -34,6 +35,6 @@
   },
   "homepage": "https://github.com/akura-co/akura#readme",
   "engines": {
-    "node": "0.12.4"
+    "node": "4.1.1"
   }
 }

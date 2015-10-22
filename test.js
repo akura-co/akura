@@ -1,38 +1,22 @@
 var
-  app = require('./app'),
+  _ = require('underscore'),
   request = require('supertest'),
+  app = require('./app'),
   server = request.agent(app)
 
 describe('test vhost', function () {
-  process.env.NODE_ENV = 'development'
-  it('can access akura.co', function (done) {
-    server.
-      get('/akura.co/').
-      expect(200, done)
+  _.each(require('./config').vhost, function (vhost) {
+    it('can access ' + vhost, function (done) {
+      server.
+        get('/').
+        set('host', vhost).
+        expect(200, done)
+    })
   })
-  it('can access afanasy.com', function (done) {
-    server.
-      get('/afanasy.com/').
-      expect(200, done)
-  })
-  it('can access ysanafa.com', function (done) {
-    server.
-      get('/ysanafa.com/').
-      expect(200, done)
-  })
-  it('can access fanafan.co', function (done) {
-    server.
-      get('/fanafan.co/').
-      expect(200, done)
-  })
-  it('can access fanafan.us', function (done) {
-    server.
-      get('/fanafan.us/').
-      expect(200, done)
-  })
-  it('can access stebeneva.ru', function (done) {
-    server.
-      get('/stebeneva.ru/').
-      expect(200, done)
-  })
+  it('cannot access not_found vhost', function (done) {
+      server.
+        get('/').
+        set('host', 'not-found.com').
+        expect(404, done)
+    })
 })
