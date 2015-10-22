@@ -16,7 +16,7 @@ try {
   HOME_DIR = __dirname.match(/^\/home\/\S+?\//)[0]
 } catch (e) {
   console.log('Cannot find home folder, does this file placed under home folder?', e)
-  throw e;
+  throw e
 }
 
 try { config = _.extend(require(HOME_DIR + '/.akura.json'), config) } catch (e) {}
@@ -24,25 +24,6 @@ try { config = _.extend(require(HOME_DIR + '/.akura.json'), config) } catch (e) 
 app.
   use(bodyParser.json()).
   use(bodyParser.urlencoded({extended: true}))
-
-  // _.each(hosts, function (host) {
-  //   var
-  //     vhostApp = requireApp(host),
-  //     alias
-  //   app.use('/' + host, vhostApp)
-  //   try {alias = require(host + '/alias')} catch (e) {}
-  //   _.each(alias, function (alias) {
-  //     app.use('/' + alias, vhostApp)
-  //   })
-  // })
-  // app.get('*', function(req, res, next) {
-  //   res.
-  //     status(404).
-  //     send('Not found')
-  // })
-  // if (!module.parent) {
-  //   app.listen(3000)
-  // }
 
 _.each(hosts, function (host) {
   var
@@ -54,14 +35,10 @@ _.each(hosts, function (host) {
     app.use(vhost(alias, vhostApp))
   })
 })
+
 http.createServer(app).listen(80)
 if (config.ssl) {
   https.createServer(_.extend(config.ssl, {
-    key: fs.readFileSync(HOME_DIR + '/.akura.co/ssl/akura.co.key'),
-    cert: fs.readFileSync(HOME_DIR + '/.akura.co/ssl/akura.co.crt'),
-    ca: [
-      fs.readFileSync(HOME_DIR + '/.akura.co/ssl/rapidSsl.crt'),
-    ],
     honorCipherOrder: true,
     ciphers: [
       'ECDHE-RSA-AES256-SHA384',
@@ -83,6 +60,7 @@ if (config.ssl) {
     ].join(':')
   }), app).listen(443)
 }
+
 function requireApp (host) {
   //support both app and static
   var app
