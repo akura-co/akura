@@ -49,25 +49,7 @@ _.each(['key', 'cert', 'ca'], function (key) {
   if (_.isArray(config.ssl[key]))
     ssl[key] = _.map(config.ssl[key], function (path) {return fs.readFileSync(path)})
 })
+if (config.ssl.ciphers)
+  ssl.ciphers = config.ssl.ciphers.join(':')
 
-https.createServer(_.extend(ssl, {
-  honorCipherOrder: true,
-  ciphers: [
-    'ECDHE-RSA-AES256-SHA384',
-    'DHE-RSA-AES256-SHA384',
-    'ECDHE-RSA-AES256-SHA256',
-    'DHE-RSA-AES256-SHA256',
-    'ECDHE-RSA-AES128-SHA256',
-    'DHE-RSA-AES128-SHA256',
-    'HIGH',
-    '!aNULL',
-    '!eNULL',
-    '!EXPORT',
-    '!DES',
-    '!RC4',
-    '!MD5',
-    '!PSK',
-    '!SRP',
-    '!CAMELLIA'
-  ].join(':')
-}), app).listen(443)
+https.createServer(_.extend(config.ssl, ssl), app).listen(443)
