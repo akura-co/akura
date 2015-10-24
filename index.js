@@ -11,7 +11,7 @@ var
   home
 
 try {
-  home = __dirname.match(/^\/home\/\S+?\//)[0]
+  home = __dirname.match(/^\/home\/[^\/]+/)[0]
 } catch (e) {
   home = '/home/ubuntu'
 }
