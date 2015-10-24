@@ -16,7 +16,9 @@ try {
   home = '/home/ubuntu'
 }
 
-try { config = _.extend(require(home + '/.akura.json'), config) } catch (e) {}
+try {
+  config = _.extend(config, require(home + '/.akura.json'))
+} catch (e) {}
 
 function requireApp (host) {
   var app
