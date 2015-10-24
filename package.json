@@ -1,40 +1,38 @@
 {
   "name": "akura",
-  "version": "1.3.0",
-  "description": "akura",
-  "main": "app.js",
+  "version": "1.4.0",
+  "description": "Akura virtual hosts dispatcher",
   "scripts": {
-    "test": "mocha test.js"
+    "test": "./node_modules/.bin/mocha"
   },
   "dependencies": {
-    "afanasy.com": "^1.3.0",
-    "akura.co": "^1.2",
-    "body-parser": "^1.14.1",
-    "errorhandler": "^1.4.2",
+    "afanasy.com": "1.3.0",
+    "akura.co": "1.2",
     "express": "4.12.4",
-    "fanafan.co": "^1.3.0",
-    "stebeneva.ru": "^1.2",
-    "underscore": "^1.8.3",
+    "fanafan.co": "1.3.0",
+    "stebeneva.ru": "1.2",
+    "underscore": "1.8.3",
     "vhost": "3.0.0"
   },
   "devDependencies": {
-    "expect.js": "^0.3.1",
-    "mocha": "^2.3.3",
-    "request": "^2.65.0",
-    "supertest": "^1.1.0",
-    "underscore": "^1.8.3"
+    "expect.js": "0.3.1",
+    "mocha": "2.3.3",
+    "supertest": "1.1.0",
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/akura-co/akura.git"
   },
-  "author": "Raabb Ajam <raabbajam@gmail.com>",
+  "author": "Afanasii Kurakin <afanasii@akura.co>",
+  "contributors": [
+    "Raabb Ajam <raabbajam@gmail.com>"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/akura-co/akura/issues"
   },
   "homepage": "https://github.com/akura-co/akura#readme",
   "engines": {
-    "node": "4.1.1"
+    "node": "4.2.1"
   }
 }
