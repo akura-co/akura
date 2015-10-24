@@ -1,7 +1,7 @@
 var
   _ = require('underscore'),
   request = require('supertest'),
-  app = require('./app'),
+  app = require('./'),
   server = request.agent(app)
 
 describe('test vhost', function () {
