@@ -8,16 +8,25 @@ var
   path = require('path'),
   config = require('./config'),
   app = module.exports = express(),
-  HOME_DIR
+  home
 
 try {
-  HOME_DIR = __dirname.match(/^\/home\/\S+?\//)[0]
+  home = __dirname.match(/^\/home\/\S+?\//)[0]
 } catch (e) {
-  console.log('Cannot find home folder, does this file placed under home folder?', e)
-  throw e
+  home = '/home/ubuntu'
 }
 
-try { config = _.extend(require(HOME_DIR + '/.akura.json'), config) } catch (e) {}
+try { config = _.extend(require(home + '/.akura.json'), config) } catch (e) {}
+
+function requireApp (host) {
+  var app
+  try {
+    app = require(host)
+  } catch (e) {
+    app = express.static(__dirname + '/node_modules/' + host)
+  }
+  return app
+}
 
 _.each(config.vhost, function (host) {
   var vhostApp = requireApp(host)
@@ -30,37 +39,35 @@ _.each(config.vhost, function (host) {
 })
 
 http.createServer(app).listen(80)
-if (config.ssl) {
-  https.createServer(_.extend(config.ssl, {
-    honorCipherOrder: true,
-    ciphers: [
-      'ECDHE-RSA-AES256-SHA384',
-      'DHE-RSA-AES256-SHA384',
-      'ECDHE-RSA-AES256-SHA256',
-      'DHE-RSA-AES256-SHA256',
-      'ECDHE-RSA-AES128-SHA256',
-      'DHE-RSA-AES128-SHA256',
-      'HIGH',
-      '!aNULL',
-      '!eNULL',
-      '!EXPORT',
-      '!DES',
-      '!RC4',
-      '!MD5',
-      '!PSK',
-      '!SRP',
-      '!CAMELLIA'
-    ].join(':')
-  }), app).listen(443)
-}
+if (!config.ssl)
+  return
 
-function requireApp (host) {
-  //support both app and static
-  var app
-  try {
-    app = require(host)
-  } catch (e) {
-    app = express.static(__dirname + '/node_modules/' + host)
-  }
-  return app
-}
+var ssl = {}
+_.each(['key', 'cert', 'ca'], function (key) {
+  if (_.isString(config.ssl[key]))
+    ssl[key] = fs.readFileSync(config.ssl[key])
+  if (_.isArray(config.ssl[key]))
+    ssl[key] = _.map(config.ssl[key], function (path) {return fs.readFileSync(path)})
+})
+
+https.createServer(_.extend(ssl, {
+  honorCipherOrder: true,
+  ciphers: [
+    'ECDHE-RSA-AES256-SHA384',
+    'DHE-RSA-AES256-SHA384',
+    'ECDHE-RSA-AES256-SHA256',
+    'DHE-RSA-AES256-SHA256',
+    'ECDHE-RSA-AES128-SHA256',
+    'DHE-RSA-AES128-SHA256',
+    'HIGH',
+    '!aNULL',
+    '!eNULL',
+    '!EXPORT',
+    '!DES',
+    '!RC4',
+    '!MD5',
+    '!PSK',
+    '!SRP',
+    '!CAMELLIA'
+  ].join(':')
+}), app).listen(443)
