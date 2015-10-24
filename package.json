@@ -6,11 +6,11 @@
     "test": "./node_modules/.bin/mocha"
   },
   "dependencies": {
-    "afanasy.com": "1.3.0",
-    "akura.co": "1.2",
+    "afanasy.com": "akura-co/afanasy.com",
+    "akura.co": "akura-co/akura.co",
     "express": "4.12.4",
-    "fanafan.co": "1.3.0",
-    "stebeneva.ru": "1.2",
+    "fanafan.co": "akura-co/fanafan.co",
+    "stebeneva.ru": "akura-co/stebeneva.ru",
     "underscore": "1.8.3",
     "vhost": "3.0.0"
   },
