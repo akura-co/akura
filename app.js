@@ -4,11 +4,9 @@ var
   http = require('http'),
   https = require('https'),
   express = require('express'),
-  bodyParser = require('body-parser'),
   vhost = require('vhost'),
   path = require('path'),
   config = require('./config'),
-  hosts = config.vhost,
   app = module.exports = express(),
   HOME_DIR
 
@@ -21,14 +19,9 @@ try {
 
 try { config = _.extend(require(HOME_DIR + '/.akura.json'), config) } catch (e) {}
 
-app.
-  use(bodyParser.json()).
-  use(bodyParser.urlencoded({extended: true}))
-
-_.each(hosts, function (host) {
-  var
-    vhostApp = requireApp(host),
-    alias
+_.each(config.vhost, function (host) {
+  var vhostApp = requireApp(host)
+  var alias
   app.use(vhost(host, vhostApp))
   try {alias = require(host + '/alias')} catch (e) {}
   _.each(alias, function (alias) {
