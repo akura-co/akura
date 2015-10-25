@@ -1,16 +1,16 @@
 {
   "name": "akura",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "Akura virtual hosts dispatcher",
   "scripts": {
     "test": "./node_modules/.bin/mocha"
   },
   "dependencies": {
-    "afanasy.com": "akura-co/afanasy.com",
-    "akura.co": "akura-co/akura.co",
+    "afanasy.com": "1.4.0",
+    "akura.co": "1.5.0",
+    "fanafan.co": "1.4.0",
+    "stebeneva.ru": "1.4.0",
     "express": "4.12.4",
-    "fanafan.co": "akura-co/fanafan.co",
-    "stebeneva.ru": "akura-co/stebeneva.ru",
     "underscore": "1.8.3",
     "vhost": "3.0.0"
   },
