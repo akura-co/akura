@@ -1,6 +1,6 @@
 {
   "name": "akura",
-  "version": "1.6.10",
+  "version": "1.6.11",
   "description": "Akura virtual hosts dispatcher",
   "scripts": {
     "test": "./node_modules/.bin/mocha"
