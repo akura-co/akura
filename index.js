@@ -20,11 +20,14 @@ try {
   config = _.extend(config, require(home + '/.akura.json'))
 } catch (e) {}
 
+console.log(config)
+
 function requireApp (host) {
   var app
   try {
-    app = require(host)
+    app = require(home + '/' + host)
   } catch (e) {
+console.log(e)
     app = express.static(__dirname + '/node_modules/' + host)
   }
   return app
