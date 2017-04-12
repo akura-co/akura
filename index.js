@@ -36,7 +36,7 @@ _.each(config.vhost, function (host) {
   var vhostApp = requireApp(host)
   var alias
   app.use(vhost(host, vhostApp))
-  try {alias = require(host + '/alias')} catch (e) {}
+  try {alias = require(home + '/' + host + '/alias')} catch (e) {}
   _.each(alias, function (alias) {
     app.use(vhost(alias, vhostApp))
   })
