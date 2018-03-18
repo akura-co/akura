@@ -20,10 +20,12 @@ try {
   config = _.extend(config, require(home + '/.akura.json'))
 } catch (e) {}
 
+console.log(config)
+
 function requireApp (host) {
   var app
   try {
-    app = require(host)
+    app = require(home + '/' + host)
   } catch (e) {
     app = express.static(__dirname + '/node_modules/' + host)
   }
@@ -34,7 +36,7 @@ _.each(config.vhost, function (host) {
   var vhostApp = requireApp(host)
   var alias
   app.use(vhost(host, vhostApp))
-  try {alias = require(host + '/alias')} catch (e) {}
+  try {alias = require(home + '/' + host + '/alias')} catch (e) {}
   _.each(alias, function (alias) {
     app.use(vhost(alias, vhostApp))
   })
