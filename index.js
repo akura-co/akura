@@ -27,7 +27,7 @@ function requireApp (host) {
   try {
     app = require(home + '/' + host)
   } catch (e) {
-    app = express.static(__dirname + '/node_modules/' + host)
+    app = express.static(home + '/' + host)
   }
   return app
 }
