@@ -1,0 +1,19 @@
+[client]
+default-character-set = utf8mb4
+
+[mysql]
+default-character-set = utf8mb4
+
+[mysqld]
+character-set-server = utf8mb4
+collation-server = utf8mb4_unicode_ci
+skip-character-set-client-handshake
+
+innodb_file_per_table = 1
+innodb_buffer_pool_size = 1G
+
+max_heap_table_size = 100M
+tmp_table_size = 100M
+
+# keep 5.5 default
+sql_mode =

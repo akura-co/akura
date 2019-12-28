@@ -1,0 +1,11 @@
+[Unit]
+After=network-online.target
+
+[Service]
+Restart=always
+LimitNOFILE=50000
+Environment=NODE_ENV=production
+ExecStart=/usr/local/bin/node /home/ubuntu/akura
+
+[Install]
+WantedBy=multi-user.target
