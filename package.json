@@ -29,6 +29,6 @@
   },
   "homepage": "https://github.com/akura-co/akura#readme",
   "engines": {
-    "node": "4.2.1"
+    "node": "8.9.3"
   }
 }
