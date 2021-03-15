@@ -57,3 +57,6 @@ if (config.ssl.ciphers)
   ssl.ciphers = config.ssl.ciphers.join(':')
 
 https.createServer(_.extend(config.ssl, ssl), app).listen(443)
+
+//exit once a day because of the SSL cert
+setTimeout(function () {process.exit()}, 86400000)
