@@ -15,5 +15,12 @@ innodb_buffer_pool_size = 1G
 max_heap_table_size = 100M
 tmp_table_size = 100M
 
+# max number to disable
+max_connect_errors = 4294967295
+
 # keep 5.5 default
 sql_mode =
+# keep 5.5 default
+innodb_checksum_algorithm = INNODB
+# keep 5.5 default
+binlog_checksum = NONE
