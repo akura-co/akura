@@ -90,6 +90,7 @@ clone hkd-bot
 clone podskazka-bot
 clone pogovorka-bot
 clone quote-bot
+clone bin-bot
 clone stebeneva.ru
 
 if [ ! -d ~/trade ] ; then
@@ -99,6 +100,7 @@ if [ ! -d ~/trade ] ; then
   cd ~/
   sudo mkdir /var/log/trade
   sudo chown ubuntu:ubuntu /var/log/trade
+  #manual - px3 add returnLendingHistory
 fi
 
 if [ ! -d ~/binlist ] ; then
