@@ -5,6 +5,7 @@ After=network-online.target
 Restart=always
 LimitNOFILE=50000
 Environment=NODE_ENV=production
+Environment=UPSTART_JOB=akura
 ExecStart=/usr/local/bin/node /home/ubuntu/akura
 
 [Install]

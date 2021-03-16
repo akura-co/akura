@@ -106,6 +106,9 @@ if [ ! -d ~/binlist ] ; then
   cd ~/
 fi
 
+#manual - copy ~/.json configs and data
+#scp 184.72.54.8:~/.stebeneva.ru ~/
+
 echo 'Installing trade/crontab'
 crontab ~/trade/crontab
 crontab -l
@@ -123,3 +126,27 @@ sudo systemctl restart mysql
 echo "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY ''" | sudo mysql -uroot
 echo 'CREATE DATABASE trade' | sudo mysql -uroot
 echo 'ALTER DATABASE trade CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci' | sudo mysql -uroot
+#manual - copy *.gz backups
+#scp -r 184.72.54.8:~/*.gz ~/
+
+echo 'Installing Ethereum'
+sudo add-apt-repository -yqq ppa:ethereum/ethereum
+sudo apt install -yqq ethereum
+#manual - copy ~/.ethereum
+#scp -r 184.72.54.8:~/.ethereum ~/
+
+echo 'Installing akura.service'
+sudo ln -sf ~/akura/akura.service /etc/systemd/system
+sudo systemctl start akura
+
+#manual - letsencrypt config
+mkdir ~/akura.co/ssl
+scp 184.72.54.8:/etc/letsencrypt/live/akura.co/*.pem ~/akura.co/ssl/
+#manual - edit config to point to copied .pem
+#vi ~/.akura.json
+sudo apt-get install -yqq certbot
+sudo certbot certonly --webroot -w ~/akura.co/public -d akura.co -m afanasy@akura.co --agree-tos -n
+sudo vi /etc/letsencrypt/renewal/akura.co.conf
+#manual - add hook
+#[renewalparams]
+#post_hook = systemctl restart akura
