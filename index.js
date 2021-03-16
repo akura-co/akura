@@ -4,11 +4,14 @@ var
   http = require('http'),
   https = require('https'),
   express = require('express'),
+  morgan = require('morgan'),
   vhost = require('vhost'),
   path = require('path'),
   config = require('./config'),
   app = module.exports = express(),
   home
+
+app.use(morgan('dev'))
 
 try {
   home = __dirname.match(/^\/home\/[^\/]+/)[0]

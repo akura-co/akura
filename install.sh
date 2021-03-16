@@ -97,6 +97,8 @@ if [ ! -d ~/trade ] ; then
   cd ~/trade
   npm i
   cd ~/
+  sudo mkdir /var/log/trade
+  sudo chown ubuntu:ubuntu /var/log/trade
 fi
 
 if [ ! -d ~/binlist ] ; then
@@ -126,6 +128,9 @@ sudo systemctl restart mysql
 echo "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY ''" | sudo mysql -uroot
 echo 'CREATE DATABASE trade' | sudo mysql -uroot
 echo 'ALTER DATABASE trade CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci' | sudo mysql -uroot
+echo "CREATE USER 'trade'@'localhost' IDENTIFIED BY ''" | sudo mysql -uroot
+echo "GRANT ALL ON trade.* TO 'trade'@'localhost'" | sudo mysql -uroot
+echo "ALTER USER 'trade'@'localhost' IDENTIFIED WITH mysql_native_password BY ''" | sudo mysql -uroot
 #manual - copy *.gz backups
 #scp -r 184.72.54.8:~/*.gz ~/
 
