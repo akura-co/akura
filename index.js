@@ -4,41 +4,35 @@ var http = require('http')
 var https = require('https')
 var express = require('express')
 var morgan = require('morgan')
-var vhost = require('vhost')
 var path = require('path')
 var config = require('./config')
-var app = module.exports = express()
-var home
-
-app.use(morgan('dev'))
-
-try {
-  home = __dirname.match(/^\/home\/[^\/]+/)[0]
-} catch (e) {
-  home = '/home/ubuntu'
-}
 
 console.log(config)
 
-function requireApp (host) {
-  var app
-  try {
-    app = require(home + '/' + host)
-  } catch (e) {
-    app = express.static(home + '/' + host)
-  }
-  return app
-}
-
+var vhost = {}
 _.each(config.vhost, host => {
-  var vhostApp = requireApp(host)
-  var alias
-  app.use(vhost(host, vhostApp))
-  try {alias = require(home + '/' + host + '/alias')} catch (e) {}
-  _.each(alias, alias => {
-    app.use(vhost(alias, vhostApp))
-  })
+  var path = __dirname + '/../' + host
+  try {
+    vhost[host] = require(path)
+  }
+  catch (e) {
+    vhost[host] = express.static(path)
+  }
+  try {
+    _.each(require(path + '/alias'), alias =>
+      vhost[alias] = vhost[host]
+    )
+  }
+  catch (e) {}
 })
+
+var app = express().
+  use(morgan(':date[iso] :req[x-forwarded-for] :method :url :status :response-time')).
+  use((req, res, next) => {
+    if (vhost[req.hostname])
+      return vhost[req.hostname](req, res, next)
+    next()
+  })
 
 var ssl = {}
 _.each(['key', 'cert', 'ca'], key => {
