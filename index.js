@@ -4,7 +4,7 @@ var http = require('http')
 var https = require('https')
 var express = require('express')
 var morgan = require('morgan')
-var path = require('path')
+var hsts = require('hsts')
 var config = require('./config')
 
 console.log(config)
@@ -28,6 +28,11 @@ _.each(config.vhost, host => {
 
 var app = express().
   use(morgan(':date[iso] :req[x-forwarded-for] :method :url :status :response-time')).
+  use(hsts({
+    maxAge: 10886400,
+    includeSubDomains: true,
+    preload: true
+  })).
   use((req, res, next) => {
     if (vhost[req.hostname])
       return vhost[req.hostname](req, res, next)
