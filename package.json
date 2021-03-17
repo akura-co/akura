@@ -2,9 +2,6 @@
   "name": "akura",
   "version": "1.6.11",
   "description": "Akura dispatcher",
-  "scripts": {
-    "test": "./node_modules/.bin/mocha"
-  },
   "dependencies": {
     "express": "4.17.1",
     "hsts": "2.2.0",

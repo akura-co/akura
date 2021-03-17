@@ -12,11 +12,22 @@ console.log(config)
 var vhost = {}
 _.each(config.vhost, host => {
   var path = __dirname + '/../' + host
+  var static
   try {
-    vhost[host] = require(path)
+    fs.accessSync(path + '/index.js')
   }
   catch (e) {
+    static = true
+  }
+  if (static)
     vhost[host] = express.static(path)
+  else {
+    try {
+      vhost[host] = require(path)
+    }
+    catch (e) {
+      console.log(e)
+    }
   }
   try {
     _.each(require(path + '/alias'), alias =>
