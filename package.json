@@ -1,20 +1,14 @@
 {
   "name": "akura",
   "version": "1.6.11",
-  "description": "Akura virtual hosts dispatcher",
+  "description": "Akura dispatcher",
   "scripts": {
     "test": "./node_modules/.bin/mocha"
   },
   "dependencies": {
-    "express": "4.12.4",
+    "express": "4.17.1",
     "morgan": "1.10.0",
-    "underscore": "1.8.3",
-    "vhost": "3.0.0"
-  },
-  "devDependencies": {
-    "expect.js": "0.3.1",
-    "mocha": "3.2.0",
-    "supertest": "1.1.0"
+    "underscore": "1.12.1"
   },
   "repository": {
     "type": "git",
