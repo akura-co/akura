@@ -1,15 +1,14 @@
-var
-  _ = require('underscore'),
-  fs = require('fs'),
-  http = require('http'),
-  https = require('https'),
-  express = require('express'),
-  morgan = require('morgan'),
-  vhost = require('vhost'),
-  path = require('path'),
-  config = require('./config'),
-  app = module.exports = express(),
-  home
+var _ = require('underscore')
+var fs = require('fs')
+var http = require('http')
+var https = require('https')
+var express = require('express')
+var morgan = require('morgan')
+var vhost = require('vhost')
+var path = require('path')
+var config = require('./config')
+var app = module.exports = express()
+var home
 
 app.use(morgan('dev'))
 
@@ -18,10 +17,6 @@ try {
 } catch (e) {
   home = '/home/ubuntu'
 }
-
-try {
-  config = _.extend(config, require(home + '/.akura.json'))
-} catch (e) {}
 
 console.log(config)
 
@@ -35,31 +30,34 @@ function requireApp (host) {
   return app
 }
 
-_.each(config.vhost, function (host) {
+_.each(config.vhost, host => {
   var vhostApp = requireApp(host)
   var alias
   app.use(vhost(host, vhostApp))
   try {alias = require(home + '/' + host + '/alias')} catch (e) {}
-  _.each(alias, function (alias) {
+  _.each(alias, alias => {
     app.use(vhost(alias, vhostApp))
   })
 })
 
-http.createServer(app).listen(80)
-if (!config.ssl)
-  return
-
 var ssl = {}
-_.each(['key', 'cert', 'ca'], function (key) {
-  if (_.isString(config.ssl[key]))
-    ssl[key] = fs.readFileSync(config.ssl[key])
-  if (_.isArray(config.ssl[key]))
-    ssl[key] = _.map(config.ssl[key], function (path) {return fs.readFileSync(path)})
+_.each(['key', 'cert', 'ca'], key => {
+  try {
+    if (_.isString(config.ssl[key]))
+      ssl[key] = fs.readFileSync(config.ssl[key])
+    if (_.isArray(config.ssl[key]))
+      ssl[key] = _.map(config.ssl[key], path => fs.readFileSync(path))
+  }
+  catch (e) {
+    //console.log(e)
+  }
 })
 if (config.ssl.ciphers)
   ssl.ciphers = config.ssl.ciphers.join(':')
 
-https.createServer(_.extend(config.ssl, ssl), app).listen(443)
-
 //exit once a day because of the SSL cert
-setTimeout(function () {process.exit()}, 86400000)
+setTimeout(() => process.exit(), 86400000)
+
+http.createServer(app).listen(80)
+if (ssl.key)
+  https.createServer(_.extend({}, config.ssl, ssl), app).listen(443)

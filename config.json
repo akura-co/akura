@@ -1,5 +1,10 @@
 {
   "ssl": {
+    "key": "/etc/letsencrypt/live/akura.co/privkey.pem",
+    "cert": "/etc/letsencrypt/live/akura.co/cert.pem",
+    "ca": [
+      "/etc/letsencrypt/live/akura.co/chain.pem"
+    ],
     "honorCipherOrder": true,
     "ciphers": [
       "ECDHE-RSA-AES256-SHA384",

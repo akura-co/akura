@@ -33,6 +33,7 @@ if ! grep -Fqs .npm-global ~/.profile; then
   mkdir -p ~/.npm-global
   npm config set prefix '~/.npm-global'
   echo 'PATH="$HOME/.npm-global/bin:$PATH"' >> ~/.profile
+  npm config set save-exact true
 fi
 
 if ! grep -Fqs NODE_ENV ~/.profile; then
@@ -105,7 +106,8 @@ fi
 
 if [ ! -d ~/binlist ] ; then
   git clone git@github.com:binlist/data.git
-  cd ~/binlist
+  mv ~/data ~/binlistData
+  cd ~/binlistData
   npm i
   cd ~/
 fi
