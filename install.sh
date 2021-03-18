@@ -145,7 +145,7 @@ sudo apt install -yqq ethereum
 #scp -r 184.72.54.8:~/.ethereum ~/
 
 echo 'Installing akura.service'
-sudo ln -sf ~/akura/akura.service /etc/systemd/system
+sudo ln -sf ~/akura/etc/systemd/system/akura.service /etc/systemd/system
 sudo systemctl enable akura.service
 sudo systemctl start akura
 
