@@ -146,6 +146,7 @@ sudo apt install -yqq ethereum
 
 echo 'Installing akura.service'
 sudo ln -sf ~/akura/akura.service /etc/systemd/system
+sudo systemctl enable akura.service
 sudo systemctl start akura
 
 #manual - letsencrypt config
