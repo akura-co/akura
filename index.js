@@ -21,7 +21,7 @@ _.each(config.vhost, host => {
     static = true
   }
   if (static)
-    vhost[host] = express.static(path)
+    vhost[host] = express.static(path, {maxAge: '1 day'})
   else {
     try {
       vhost[host] = require(path)
