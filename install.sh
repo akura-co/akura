@@ -88,6 +88,7 @@ clone afanasy.com
 clone akura.co
 clone fanafan.co
 clone hkd-bot
+clone ninjson.com
 clone podskazka-bot
 clone pogovorka-bot
 clone quote-bot
@@ -155,7 +156,14 @@ scp 184.72.54.8:/etc/letsencrypt/live/akura.co/*.pem ~/akura.co/ssl/
 #manual - edit config to point to copied .pem
 #vi ~/.akura.json
 sudo apt-get install -yqq certbot
-sudo certbot certonly --webroot -w ~/akura.co/public -d akura.co -m afanasy@akura.co --agree-tos -n
+sudo certbot certonly --webroot -w ~/akura.co/public -d akura.co -n
+sudo certbot certonly --webroot -w ~/afanasy.com/ -d afanasy.com -n
+sudo certbot certonly --webroot -w ~/afanasy.com/ -d ysanafa.com -n
+sudo certbot certonly --webroot -w ~/fanafan.co/ -d fanafan.co -n
+sudo certbot certonly --webroot -w ~/fanafan.co/ -d fanafan.us -n
+sudo certbot certonly --webroot -w ~/ninjson.com/ -d ninjson.com -n
+sudo certbot certonly --webroot -w ~/stebeneva.ru/public -d stebeneva.ru -n
+sudo certbot certonly --webroot -w ~/stebeneva.ru/public -d stebeneva.pro -n
 sudo vi /etc/letsencrypt/renewal/akura.co.conf
 #manual - add hook
 #[renewalparams]

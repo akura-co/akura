@@ -1,34 +1,9 @@
 {
-  "ssl": {
-    "key": "/etc/letsencrypt/live/akura.co/privkey.pem",
-    "cert": "/etc/letsencrypt/live/akura.co/cert.pem",
-    "ca": [
-      "/etc/letsencrypt/live/akura.co/chain.pem"
-    ],
-    "honorCipherOrder": true,
-    "ciphers": [
-      "ECDHE-RSA-AES256-SHA384",
-      "DHE-RSA-AES256-SHA384",
-      "ECDHE-RSA-AES256-SHA256",
-      "DHE-RSA-AES256-SHA256",
-      "ECDHE-RSA-AES128-SHA256",
-      "DHE-RSA-AES128-SHA256",
-      "HIGH",
-      "!aNULL",
-      "!eNULL",
-      "!EXPORT",
-      "!DES",
-      "!RC4",
-      "!MD5",
-      "!PSK",
-      "!SRP",
-      "!CAMELLIA"
-    ]
-  },
   "vhost": [
     "akura.co",
     "afanasy.com",
     "fanafan.co",
+    "ninjson.com",
     "stebeneva.ru"
   ]
 }
