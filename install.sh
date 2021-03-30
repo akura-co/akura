@@ -102,7 +102,6 @@ if [ ! -d ~/trade ] ; then
   cd ~/
   sudo mkdir /var/log/trade
   sudo chown ubuntu:ubuntu /var/log/trade
-  #manual - px3 add returnLendingHistory
 fi
 
 if [ ! -d ~/binlist ] ; then
@@ -114,7 +113,7 @@ if [ ! -d ~/binlist ] ; then
 fi
 
 #manual - copy ~/.json configs and data
-#scp 184.72.54.8:~/.stebeneva.ru ~/
+#scp 184.72.54.8:~/*.json ~/
 
 echo 'Installing trade/crontab'
 crontab ~/trade/crontab
@@ -162,8 +161,6 @@ sudo certbot certonly --webroot -w ~/afanasy.com/ -d ysanafa.com -n
 sudo certbot certonly --webroot -w ~/fanafan.co/ -d fanafan.co -n
 sudo certbot certonly --webroot -w ~/fanafan.co/ -d fanafan.us -n
 sudo certbot certonly --webroot -w ~/ninjson.com/ -d ninjson.com -n
-sudo certbot certonly --webroot -w ~/stebeneva.ru/public -d stebeneva.ru -n
-sudo certbot certonly --webroot -w ~/stebeneva.ru/public -d stebeneva.pro -n
 sudo vi /etc/letsencrypt/renewal/akura.co.conf
 #manual - add hook
 #[renewalparams]

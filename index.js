@@ -4,7 +4,7 @@ var morgan = require('morgan')
 var hsts = require('hsts')
 var fs = require('fs')
 var http = require('http')
-var https = require('https')
+var spdy = require('spdy')
 var tls = require('tls')
 var hostname = require('os').hostname()
 var config = require('./config')
@@ -91,23 +91,6 @@ var app = express().
     next()
   })
 
-/*
-var ssl = {}
-_.each(['key', 'cert', 'ca'], key => {
-  try {
-    if (_.isString(config.ssl[key]))
-      ssl[key] = fs.readFileSync(config.ssl[key])
-    if (_.isArray(config.ssl[key]))
-      ssl[key] = _.map(config.ssl[key], path => fs.readFileSync(path))
-  }
-  catch (e) {
-    //console.log(e)
-  }
-})
-if (config.ssl.ciphers)
-  ssl.ciphers = config.ssl.ciphers.join(':')
-*/
-
 //exit once a day because of the SSL cert
 setTimeout(() => process.exit(), 86400000)
 
@@ -119,5 +102,5 @@ if (secureContext[hostname]) {
       return done(true)
     done(null, tls.createSecureContext(secureContext[domain]))  
   }
-  https.createServer(secureContext[hostname], app).listen(443)
+  spdy.createServer(secureContext[hostname], app).listen(443)
 }
