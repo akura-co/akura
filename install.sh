@@ -94,15 +94,7 @@ clone pogovorka-bot
 clone quote-bot
 clone bin-bot
 clone stebeneva.ru
-
-if [ ! -d ~/trade ] ; then
-  git clone git@github.com:afanasy/trade.git
-  cd ~/trade
-  npm i
-  cd ~/
-  sudo mkdir /var/log/trade
-  sudo chown ubuntu:ubuntu /var/log/trade
-fi
+clone trade
 
 if [ ! -d ~/binlist ] ; then
   git clone git@github.com:binlist/data.git
@@ -115,10 +107,6 @@ fi
 #manual - copy ~/.json configs and data
 #scp 184.72.54.8:~/*.json ~/
 
-echo 'Installing trade/crontab'
-crontab ~/trade/crontab
-crontab -l
-
 echo 'Installing MySQL server'
 sudo apt install -yqq mysql-server
 sudo ln -sf /home/ubuntu/akura/etc/mysql/conf.d/akura.cnf /etc/mysql/mysql.conf.d/akura.cnf
@@ -130,11 +118,6 @@ sudo apparmor_parser -r /etc/apparmor.d/usr.sbin.mysqld
 sudo systemctl restart mysql
 
 echo "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY ''" | sudo mysql -uroot
-echo 'CREATE DATABASE trade' | sudo mysql -uroot
-echo 'ALTER DATABASE trade CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci' | sudo mysql -uroot
-echo "CREATE USER 'trade'@'localhost' IDENTIFIED BY ''" | sudo mysql -uroot
-echo "GRANT ALL ON trade.* TO 'trade'@'localhost'" | sudo mysql -uroot
-echo "ALTER USER 'trade'@'localhost' IDENTIFIED WITH mysql_native_password BY ''" | sudo mysql -uroot
 #manual - copy *.gz backups
 #scp -r 184.72.54.8:~/*.gz ~/
 
