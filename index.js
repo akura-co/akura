@@ -59,6 +59,7 @@ _.each(_.keys(vhost), domain => {
     cert: cert,
     ca: ca
   }
+  /*
   secureContext[domain].ciphers = [
     'TLS_AES_256_GCM_SHA384',
     'TLS_CHACHA20_POLY1305_SHA256',
@@ -76,6 +77,7 @@ _.each(_.keys(vhost), domain => {
     'DHE-RSA-AES256-SHA256'
   ].join(':')
   secureContext[domain].honorCipherOrder = true
+  */
 })
 
 var app = express().

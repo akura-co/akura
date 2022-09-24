@@ -24,3 +24,5 @@ sql_mode =
 innodb_checksum_algorithm = INNODB
 # keep 5.5 default
 binlog_checksum = NONE
+
+bind-address = 0.0.0.0

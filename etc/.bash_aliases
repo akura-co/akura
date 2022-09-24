@@ -1,3 +1,6 @@
 alias db='sudo mysql -uroot trade'
 alias gca='git commit -v -a'
 alias log='journalctl -f -u akura'
+alias start='sudo systemctl daemon-reload; sudo systemctl start'
+alias stop='sudo systemctl stop'
+alias restart='sudo systemctl daemon-reload; sudo systemctl restart'

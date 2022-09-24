@@ -15,8 +15,9 @@ echo 'Updating packages'
 sudo apt update -qq
 sudo DEBIAN_FRONTEND=noninteractive apt upgrade -yqq
 
-echo 'Installing NTP'
-sudo apt install -yqq ntp
+#Systemd has time daemon
+#echo 'Installing NTP'
+#sudo apt install -yqq ntp
 
 echo 'Installing Node.js'
 if ! command -v node; then
