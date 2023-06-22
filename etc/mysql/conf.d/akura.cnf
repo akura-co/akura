@@ -26,3 +26,4 @@ innodb_checksum_algorithm = INNODB
 binlog_checksum = NONE
 
 bind-address = 0.0.0.0
+skip_log_bin
